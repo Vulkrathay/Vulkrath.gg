@@ -1,1 +1,259 @@
 # Vulkrath.gg
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090812">
+  <meta name="description" content="Willkommen bei VULKRATHAY – Gaming, Streams und Community.">
+  <title>VULKRATHAY — Enter the Realm</title>
+  <style>
+    :root {
+      --bg: #090812;
+      --panel: rgba(20, 16, 35, .78);
+      --purple: #9b6cff;
+      --violet: #6f42c1;
+      --text: #f5f0ff;
+      --muted: #b9afcb;
+      --line: rgba(190, 155, 255, .2);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text); background: var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .site { min-height: 100vh; overflow: hidden; }
+    .top-glow {
+      position: fixed; inset: -30% -10% auto; height: 620px; pointer-events: none;
+      background: radial-gradient(ellipse, rgba(115, 62, 190, .22), transparent 65%);
+      filter: blur(20px); z-index: -1;
+    }
+    header {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1180px; margin: auto; padding: 24px 28px;
+    }
+    .brand { font-size: 1.05rem; font-weight: 900; letter-spacing: .19em; }
+    .brand span { color: var(--purple); }
+    nav { display: flex; gap: 26px; color: #d4cbe4; font-size: .88rem; }
+    nav a:hover { color: white; }
+    .hero {
+      min-height: 740px; display: grid; place-items: center; text-align: center;
+      padding: 150px 24px 90px; position: relative; isolation: isolate;
+      background:
+        linear-gradient(180deg, rgba(9,8,18,.3), #090812 96%),
+        radial-gradient(ellipse at 50% 35%, rgba(123,76,202,.32), transparent 52%),
+        linear-gradient(135deg, #171025, #0c0a16 52%, #171027);
+    }
+    .hero:before, .hero:after {
+      content: ""; position: absolute; z-index: -1; pointer-events: none;
+      border: 1px solid rgba(174,132,255,.13); transform: rotate(45deg);
+    }
+    .hero:before { width: 440px; height: 440px; top: 150px; left: -230px; }
+    .hero:after { width: 560px; height: 560px; bottom: -340px; right: -160px; }
+    .eyebrow {
+      color: #c5a8ff; text-transform: uppercase; letter-spacing: .32em;
+      font-size: .72rem; font-weight: 800; margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0; font-size: clamp(3.2rem, 10vw, 7.8rem); line-height: .98;
+      letter-spacing: .045em; font-weight: 950;
+      text-shadow: 0 0 35px rgba(151,99,255,.34);
+    }
+    h1 .accent { color: var(--purple); }
+    .hero p { max-width: 610px; margin: 25px auto 30px; color: #d0c6df; font-size: clamp(1rem, 2vw, 1.15rem); }
+    .actions { display: flex; justify-content: center; gap: 13px; flex-wrap: wrap; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 49px; padding: 0 23px; border-radius: 8px; font-weight: 850;
+      letter-spacing: .045em; font-size: .85rem; transition: .2s ease;
+    }
+    .button.primary {
+      color: white; background: linear-gradient(135deg, #9c6bff, #6336b5);
+      box-shadow: 0 10px 35px rgba(118,69,200,.27);
+    }
+    .button.secondary { border: 1px solid var(--line); background: rgba(255,255,255,.035); }
+    .button:hover { transform: translateY(-3px); filter: brightness(1.12); }
+    .scroll-note { margin-top: 66px; color: #817692; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; }
+    main { max-width: 1080px; margin: auto; padding: 30px 24px 100px; }
+    section { padding: 62px 0; }
+    .section-kicker { color: var(--purple); text-transform: uppercase; letter-spacing: .25em; font-size: .7rem; font-weight: 900; }
+    h2 { margin: 8px 0 14px; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; }
+    .intro { color: var(--muted); max-width: 650px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+    .card {
+      padding: 25px; min-height: 190px; border: 1px solid var(--line);
+      border-radius: 14px; background: linear-gradient(145deg, var(--panel), rgba(15,12,25,.65));
+    }
+    .card .symbol { font-size: 1.55rem; margin-bottom: 12px; }
+    .card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .twitch-panel {
+      margin-top: 28px; padding: clamp(24px, 5vw, 42px); border-radius: 18px;
+      border: 1px solid rgba(161,112,255,.3);
+      background: radial-gradient(ellipse at 100% 0%, rgba(120,72,204,.22), transparent 55%), #151020;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+    }
+    .twitch-panel h3 { margin: 0 0 7px; font-size: 1.45rem; }
+    .twitch-panel p { margin: 0; color: var(--muted); }
+    .live-layout {
+      display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px;
+      margin-top: 28px; align-items: stretch;
+    }
+    .embed-card {
+      min-width: 0; overflow: hidden; border: 1px solid var(--line);
+      border-radius: 14px; background: #100d19;
+    }
+    .embed-heading {
+      padding: 14px 17px; border-bottom: 1px solid var(--line);
+      color: #d9c9f5; font-size: .82rem; font-weight: 850; letter-spacing: .08em;
+    }
+    .player-frame { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #08070d; }
+    .chat-frame { display: block; width: 100%; height: 100%; min-height: 390px; border: 0; background: #0e0c14; }
+    .embed-note { margin-top: 14px; color: var(--muted); font-size: .84rem; }
+    .community {
+      text-align: center; padding: 55px 24px; border-radius: 18px;
+      background: linear-gradient(135deg, rgba(111,66,193,.2), rgba(20,15,31,.8));
+      border: 1px solid var(--line);
+    }
+    .community .intro { margin: 0 auto 23px; }
+    footer {
+      border-top: 1px solid rgba(255,255,255,.08); padding: 25px 24px;
+      color: #8f849f; text-align: center; font-size: .8rem;
+    }
+    footer strong { color: #c8b2ef; letter-spacing: .14em; }
+    @media (max-width: 720px) {
+      header { padding: 19px 20px; }
+      nav { gap: 13px; font-size: .76rem; }
+      .hero { min-height: 680px; }
+      .cards { grid-template-columns: 1fr; }
+      .live-layout { grid-template-columns: 1fr; }
+      .chat-frame { min-height: 430px; }
+      section { padding: 45px 0; }
+    }
+    @media (max-width: 430px) {
+      .brand { font-size: .85rem; }
+      nav { gap: 9px; font-size: .68rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="site">
+  <div class="top-glow"></div>
+  <header>
+    <a class="brand" href="#home">VULK<span>RATHAY</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="#about">Über mich</a>
+      <a href="#stream">Stream</a>
+      <a href="#community">Community</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div>
+      <div class="eyebrow">Gaming · Streaming · Community</div>
+      <h1>VULK<span class="accent">RATHAY</span></h1>
+      <p>Willkommen in meinem Realm. Entdecke meine Streams, schau vorbei und werde Teil der Community.</p>
+      <div class="actions">
+        <a class="button primary" href="https://www.twitch.tv/vulkrathay" target="_blank" rel="noopener noreferrer">▶ ZUM TWITCH-KANAL</a>
+        <a class="button secondary" href="#about">MEHR ENTDECKEN</a>
+      </div>
+      <div class="scroll-note">Scroll to explore&nbsp; ↓</div>
+    </div>
+  </section>
+
+  <main>
+    <section id="about">
+      <div class="section-kicker">Das ist VULKRATHAY</div>
+      <h2>Betritt den Realm.</h2>
+      <p class="intro">Hier dreht sich alles um Gaming, Streams und eine starke Community. Schau auf Twitch vorbei und sei live dabei, wenn das nächste Abenteuer beginnt.</p>
+      <div class="cards">
+        <article class="card">
+          <div class="symbol">⚔️</div>
+          <h3>Gaming</h3>
+          <p>Gemeinsam in neue Welten eintauchen und spannende Gaming-Momente erleben.</p>
+        </article>
+        <article class="card">
+          <div class="symbol">✦</div>
+          <h3>Live-Content</h3>
+          <p>Verpasse keine Streams und schalte auf Twitch ein, wenn live gesendet wird.</p>
+        </article>
+        <article class="card">
+          <div class="symbol">☾</div>
+          <h3>Community</h3>
+          <p>Werde Teil des Chats, tausche dich aus und erlebe die Streams gemeinsam.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="stream">
+      <div class="section-kicker">Live dabei sein</div>
+      <h2>Stream &amp; Chat – direkt hier.</h2>
+      <p class="intro">Schau den Livestream und verfolge den Chat, ohne diese Website zu verlassen.</p>
+      <div class="live-layout">
+        <div class="embed-card">
+          <div class="embed-heading">▶ LIVE-STREAM</div>
+          <iframe
+            id="twitch-player"
+            class="player-frame"
+            title="Vulkrathay Twitch Livestream"
+            allowfullscreen="true"
+            scrolling="no"
+            frameborder="0">
+          </iframe>
+        </div>
+        <div class="embed-card">
+          <div class="embed-heading">✦ LIVE-CHAT</div>
+          <iframe
+            id="twitch-chat"
+            class="chat-frame"
+            title="Vulkrathay Twitch Chat"
+            scrolling="no"
+            frameborder="0">
+          </iframe>
+        </div>
+      </div>
+      <p class="embed-note">Hinweis: Twitch verlangt eine gültige Website-Adresse als Einbettungsfreigabe. Deshalb funktionieren Stream und Chat erst richtig, wenn du die Website auf einer HTTPS-Adresse veröffentlichst. Zum Schreiben im Chat ist ein Twitch-Login erforderlich.</p>
+      <div class="twitch-panel">
+        <div>
+          <h3>Lieber direkt auf Twitch?</h3>
+          <p>Öffne den Kanal in einem neuen Tab.</p>
+        </div>
+        <a class="button primary" href="https://www.twitch.tv/vulkrathay" target="_blank" rel="noopener noreferrer">TWITCH ÖFFNEN ↗</a>
+      </div>
+    </section>
+
+    <section id="community">
+      <div class="community">
+        <div class="section-kicker">Du bist eingeladen</div>
+        <h2>Wir sehen uns im Chat.</h2>
+        <p class="intro">Folge dem Kanal auf Twitch und sei bei den nächsten Gaming-Abenteuern dabei.</p>
+        <a class="button primary" href="https://www.twitch.tv/vulkrathay" target="_blank" rel="noopener noreferrer">FOLLOW AUF TWITCH</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><strong>VULKRATHAY</strong><br>© <span id="year"></span> · Enter the Realm.</footer>
+</div>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Twitch benötigt die Domain, auf der diese Seite eingebettet ist.
+  // Nach dem Veröffentlichen auf HTTPS wird die aktuelle Domain automatisch eingesetzt.
+  const parentDomain = window.location.hostname;
+  if (parentDomain) {
+    const parent = encodeURIComponent(parentDomain);
+    document.getElementById('twitch-player').src =
+      'https://player.twitch.tv/?channel=vulkrathay&parent=' + parent + '&muted=true';
+    document.getElementById('twitch-chat').src =
+      'https://www.twitch.tv/embed/vulkrathay/chat?parent=' + parent + '&darkpopout';
+  } else {
+    document.querySelector('.embed-note').textContent =
+      'Bitte veröffentliche diese Website zuerst auf einer HTTPS-Adresse (z. B. mit GitHub Pages). Danach werden Stream und Chat hier automatisch geladen.';
+  }
+</script>
+</body>
+</html>
